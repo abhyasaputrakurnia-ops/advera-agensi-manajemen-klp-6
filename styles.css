@@ -1,0 +1,1764 @@
+/* =========================================================
+   ADVERA - styles.css
+   Tema: Control Room (latar gelap, cyan hanya untuk "produk")
+   ========================================================= */
+
+
+/* =========================================================
+   BAGIAN UI/UX DESIGNER 1
+   Skema warna, tipografi, tata letak, dan responsif
+   ========================================================= */
+
+/* ---------- 1. Skema warna & ukuran dasar ---------- */
+:root {
+  /* Latar (diulang bergantian antarbagian) */
+  --ground: #1b2932;         /* latar utama */
+  --ground-alt: #02444b;     /* latar alternatif (hero, footer) */
+  --ground-inverse: #efedef; /* latar terang (kalkulator) */
+  --surface: #213039;        /* kartu dan panel */
+  --surface-deep: #14212a;   /* panel produk yang lebih gelap */
+  --hairline: #32414a;       /* garis tipis */
+  --hairline-light: #c4c2c4; /* garis tipis di latar terang */
+
+  /* Teks */
+  --text: #fefdfe;
+  --text-2: #eaeae9;
+  --text-muted: #dbdbda;
+  --text-inverse: #040404;
+  --text-inverse-muted: #3d3c3d;
+
+  /* Warna merek: HANYA dipakai di mockup produk dan panel hasil */
+  --accent: #67e8f9;
+
+  /* Tombol utama */
+  --btn: #f1f3f4;
+  --btn-label: #040404;
+
+  /* Tipografi */
+  --font-display: "Host Grotesk", "Segoe UI", Arial, sans-serif;   /* judul */
+  --font-body: "Host Grotesk", "Segoe UI", Arial, sans-serif;      /* teks paragraf */
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;          /* label, angka, tombol */
+  --font-accent: "Instrument Serif", Georgia, serif;               /* kata aksen miring */
+
+  /* Jarak */
+  --page-margin: 24px;
+  --band-top: 64px;
+  --band-bottom: 56px;
+  --container: 1240px;
+}
+
+/* ---------- 2. Reset & dasar ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--ground);
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Label kecil, angka, dan data memakai huruf mono (ciri tema Control Room) */
+.eyebrow, .nav-link, .brand-tag, .stat-label, .hero-caption, .visual-caption,
+.browser-url, .metric-label, .metric-change, .chart-label, .chart-days, .channel,
+.dash-status, .plan-tag, .price-unit, .plan-promo, .plan-badge, .field-label,
+.field-hint, .result-title, .result-label, .result-value, .result-message,
+.feature-num, .feature-plans, .photo-tag, .mock-label, .mock-sub, .mock-on, .chip,
+.mock-table, .mock-note, .footer-title, .member-role, .footer-bottom, .step-num,
+.section-lead, .footer-links {
+  font-family: var(--font-mono);
+}
+
+/* Kata aksen di judul: serif miring */
+.accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.1em;
+  letter-spacing: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--text-inverse);
+}
+
+/* Bagian yang dituju link navigasi tidak tertutup header */
+section {
+  scroll-margin-top: 72px;
+}
+
+/* ---------- 3. Tipografi ---------- */
+h1,
+h2,
+h3,
+.brand-name,
+.stat-value,
+.price-amount,
+.metric-value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 1.4rem + 3.4vw, 4.2rem); /* 40px di HP, 67px di layar lebar */
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.section-title {
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.75rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.section-lead,
+.hero-lead {
+  color: var(--text-2);
+  max-width: 62ch;
+}
+
+.hero-lead {
+  font-size: 1.125rem;
+}
+
+.section-lead {
+  font-size: 0.875rem;
+}
+
+/* ---------- 4. Tata letak umum ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--page-margin);
+}
+
+.section-head {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+/* ---------- 5. Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--ground);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 68px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brand-name {
+  font-size: 1.375rem;
+}
+
+.brand-tag {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- 6. Hero ---------- */
+.hero-opening {
+  background: var(--ground-alt);
+  padding: 72px 0 80px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-text {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+.hero-text .eyebrow {
+  margin-bottom: 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-caption {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 8px 0 0;
+  border-top: 1px solid rgba(254, 253, 254, 0.18);
+  padding-top: 20px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column-reverse; /* angka di atas, label di bawah */
+  justify-content: flex-end;      /* semua angka sejajar di atas */
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.hero-visual {
+  margin: 0;
+}
+
+/* ---------- 7. Katalog ---------- */
+.catalog-plans {
+  background: var(--ground-alt);
+  padding: var(--band-top) 0 var(--band-bottom);
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* ---------- 8. Kalkulator ---------- */
+.calc-main {
+  background: var(--ground-inverse);
+  color: var(--text-inverse);
+  padding: var(--band-top) 0 var(--band-bottom);
+}
+
+.calc-main .eyebrow {
+  color: var(--text-inverse-muted);
+}
+
+.calc-main .section-lead {
+  color: var(--text-inverse-muted);
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ---------- 9. Footer ---------- */
+.site-footer {
+  font-size: 0.875rem;
+}
+
+.footer-main {
+  background: var(--surface-deep);
+  padding: 56px 0 28px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.6fr;
+  gap: 40px;
+}
+
+.footer-desc {
+  color: var(--text-2);
+  margin-top: 10px;
+  max-width: 38ch;
+}
+
+.footer-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.footer-links,
+.member-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.member-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.member-role {
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-top: 20px;
+  position: relative;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+}
+
+/* Garis atas footer sejajar dengan tepi teks */
+.footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--page-margin);
+  right: var(--page-margin);
+  border-top: 1px solid rgba(254, 253, 254, 0.18);
+}
+
+/* ---------- 9b. Tata letak tambahan ---------- */
+
+/* Judul bagian dengan tombol di kanan */
+.section-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* Keunggulan: baris kiri-kanan bergantian */
+.features {
+  background: var(--ground);
+  padding: var(--band-top) 0 var(--band-bottom);
+}
+
+.feature-list {
+  display: grid;
+  gap: 112px;
+  padding: 32px 0 72px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: center;
+}
+
+/* Baris kedua dibalik: foto di kanan, teks di kiri, dan teks turun ke bawah */
+.feature-row:nth-child(even) {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: end;
+}
+
+.feature-row:nth-child(even) .feature-visual {
+  order: 2;
+}
+
+/* Foto dengan panel mockup yang "mengambang" menimpa sudutnya */
+.feature-visual {
+  margin: 0;
+  position: relative;
+}
+
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-tall {
+  aspect-ratio: 4 / 5;
+  width: 74%;
+}
+
+.photo-wide {
+  aspect-ratio: 3 / 2;
+  width: 86%;
+}
+
+.feature-row:nth-child(even) .photo-frame {
+  margin-left: auto;
+}
+
+.mock-float {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: -48px;
+  width: 54%;
+}
+
+.feature-row:nth-child(even) .mock-float {
+  right: auto;
+  left: 0;
+}
+
+.feature-visual .visual-caption {
+  max-width: 40%;
+}
+
+.feature-row:nth-child(even) .visual-caption {
+  margin-left: auto;
+  text-align: right;
+}
+
+.feature-text {
+  display: grid;
+  gap: 14px;
+  max-width: 46ch;
+}
+
+/* Tanya jawab: judul di kiri, daftar di kanan */
+.faq {
+  background: var(--ground);
+  padding: var(--band-top) 0 var(--band-bottom);
+}
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.faq-head {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  position: sticky;
+  top: 96px;
+}
+
+.faq-head .eyebrow {
+  margin-bottom: 0;
+}
+
+/* Panduan langkah kalkulator */
+.calc-steps {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.form-actions .btn-primary {
+  flex: 1;
+}
+
+/* Banner penutup */
+.closing {
+  background: var(--ground-alt);
+  padding: 56px 0;
+}
+
+.closing-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  column-gap: 56px;
+  row-gap: 20px;
+  align-items: end;
+}
+
+.closing-title {
+  grid-row: span 2;
+}
+
+.closing-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Tombol menu hanya untuk HP */
+.nav-toggle {
+  display: none;
+}
+
+/* ---------- 10. Responsif: tablet ---------- */
+@media (max-width: 960px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-team {
+    grid-column: 1 / -1;
+  }
+
+  .feature-list {
+    gap: 72px;
+  }
+
+  .feature-row,
+  .feature-row:nth-child(even) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  /* Di layar sempit foto selalu di atas teks */
+  .feature-row:nth-child(even) .feature-visual {
+    order: 0;
+  }
+
+  .photo-tall,
+  .photo-wide {
+    width: 100%;
+  }
+
+  .photo-tall {
+    aspect-ratio: 4 / 4.4;
+  }
+
+  /* Panel mockup turun ke bawah foto, sedikit menimpa */
+  .mock-float,
+  .feature-row:nth-child(even) .mock-float {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: calc(100% - 24px);
+    margin: -56px 0 0 auto;
+  }
+
+  .feature-visual .visual-caption,
+  .feature-row:nth-child(even) .visual-caption {
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .faq-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .faq-head {
+    position: static;
+  }
+
+  .closing-text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .closing-title {
+    grid-row: auto;
+  }
+
+
+}
+
+/* ---------- 11. Responsif: HP ---------- */
+@media (max-width: 640px) {
+  :root {
+    --page-margin: 20px;
+    --band-top: 44px;
+    --band-bottom: 40px;
+  }
+
+  section {
+    scroll-margin-top: 72px;
+  }
+
+  /* Header: logo kiri, tombol Menu kanan, navigasi terbuka ke bawah */
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 0;
+    min-height: 64px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .site-nav {
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 8px 0 20px;
+  }
+
+  /* Menu disembunyikan hanya kalau JavaScript aktif (tombol Menu bisa dipakai) */
+  .js-nav .site-nav {
+    display: none;
+  }
+
+  .js-nav .site-nav.is-open {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .calc-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .closing-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .closing-text {
+    justify-items: stretch;
+  }
+
+
+
+  .hero-opening {
+    padding: 44px 0 52px;
+  }
+
+
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .stat-value {
+    font-size: 1.375rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Nama anggota di atas, peran di bawahnya */
+  .member-list li {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .member-role {
+    text-align: left;
+    font-size: 0.75rem;
+  }
+}
+
+
+/* =========================================================
+   BAGIAN UI/UX DESIGNER 2
+   Komponen: tombol, kartu katalog, mockup, form, panel hasil
+   ========================================================= */
+
+/* ---------- 12. Logo ---------- */
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ---------- 13. Link navigasi ---------- */
+.nav-link {
+  text-decoration: none;
+  color: var(--text-2);
+  font-size: 0.875rem;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-2);
+}
+
+.footer-links a:hover {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- 14. Tombol ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  border-radius: 0; /* sudut tajam sesuai tema */
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.btn-primary {
+  background: var(--btn);
+  color: var(--btn-label);
+  border-color: var(--btn);
+}
+
+.btn-primary:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: rgba(254, 253, 254, 0.55);
+}
+
+.btn-secondary:hover {
+  background: var(--text);
+  color: var(--text-inverse);
+  border-color: var(--text);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-small {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 0.8125rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Tombol di latar terang (kalkulator) dibalik jadi gelap */
+.calc-main .btn-primary {
+  background: var(--text-inverse);
+  color: var(--text);
+  border-color: var(--text-inverse);
+}
+
+.calc-main .btn-primary:hover {
+  background: var(--ground);
+  border-color: var(--ground);
+}
+
+/* Fokus keyboard selalu terlihat */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.calc-main a:focus-visible,
+.calc-main button:focus-visible,
+.calc-main select:focus-visible,
+.calc-main input:focus-visible {
+  outline-color: var(--text-inverse);
+}
+
+/* ---------- 15. Mockup dasbor di hero (produk, boleh cyan) ---------- */
+.browser-frame {
+  background: var(--surface-deep);
+  border: 1px solid rgba(254, 253, 254, 0.14);
+  box-shadow: 0 30px 60px rgba(0, 10, 15, 0.45);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.browser-dots i {
+  width: 9px;
+  height: 9px;
+  background: var(--hairline);
+  display: block;
+}
+
+.browser-url {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface-deep);
+  padding: 4px 12px;
+  flex: 1;
+}
+
+.dash {
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+
+.dash-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dash-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.dash-status {
+  font-size: 0.75rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(103, 232, 249, 0.18);
+}
+
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 14px;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.metric-value {
+  font-size: 1.625rem;
+  color: var(--accent);
+  margin: 4px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-change {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.dash-chart {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 14px;
+}
+
+.chart-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.chart-bars {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.bar {
+  flex: 1;
+  height: var(--h); /* tinggi diambil dari atribut style di HTML */
+  background: var(--accent);
+}
+
+.chart-days {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.chart-days span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.dash-channels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.channel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  padding: 10px 14px;
+  border: 1px solid var(--hairline);
+  color: var(--text-2);
+}
+
+.channel span:last-child {
+  color: var(--accent);
+}
+
+.visual-caption {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* ---------- 16. Kartu katalog ---------- */
+.plan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 28px 24px 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.plan-card:hover {
+  border-color: rgba(254, 253, 254, 0.5);
+  transform: translateY(-4px);
+}
+
+.plan-featured {
+  border-color: var(--btn);
+  box-shadow: inset 0 3px 0 var(--btn);
+}
+
+.plan-badge {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background: var(--btn);
+  color: var(--btn-label);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+}
+
+.plan-tag {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.plan-name {
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.plan-desc {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+.plan-price {
+  padding: 14px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-unit {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.plan-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  flex: 1; /* tombol tetap sejajar di bawah walau isi kartu beda panjang */
+}
+
+.plan-features li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.plan-features li::before {
+  content: "+";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.plan-promo {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  background: var(--ground);
+  padding: 10px 12px;
+}
+
+.plan-promo strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.plan-promo s {
+  margin-left: 6px;
+}
+
+/* Kotak informasi kode promo */
+.promo-box {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border: 1px dashed rgba(254, 253, 254, 0.4);
+  padding: 20px 24px;
+}
+
+.promo-code {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  background: var(--btn);
+  color: var(--btn-label);
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+.promo-text {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+.promo-text strong {
+  color: var(--text);
+}
+
+/* ---------- 17. Formulir kalkulator ---------- */
+.calc-form {
+  display: grid;
+  gap: 20px;
+  background: #ffffff;
+  border: 1px solid var(--hairline-light);
+  padding: 28px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.field-optional {
+  font-weight: 400;
+  color: var(--text-inverse-muted);
+}
+
+.field-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid #6e6d6e;
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--text-inverse);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field-input::placeholder {
+  color: #6e6d6e;
+}
+
+.field-input:hover {
+  border-color: var(--text-inverse);
+}
+
+.field-input:focus {
+  border-color: var(--text-inverse);
+  box-shadow: inset 0 0 0 1px var(--text-inverse);
+}
+
+/* Dropdown dengan panah buatan sendiri */
+select.field-input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23040404' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--text-inverse-muted);
+}
+
+/* ---------- 18. Panel hasil (produk, boleh cyan) ---------- */
+.calc-result {
+  background: var(--ground);
+  color: var(--text);
+  padding: 28px;
+  display: grid;
+  gap: 4px;
+}
+
+.result-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.result-package {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 6px 0 14px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.result-label {
+  font-size: 0.875rem;
+  color: var(--text-2);
+}
+
+.result-value {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.result-total {
+  border-bottom: none;
+  padding-top: 18px;
+}
+
+.result-total .result-label {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.result-total .result-value {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.result-message {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-left: 3px solid var(--hairline);
+  color: var(--text-muted);
+}
+
+/* Warna pesan sesuai status dari script.js */
+.result-message.is-success {
+  border-left-color: var(--accent);
+  color: var(--accent);
+}
+
+.result-message.is-warning {
+  border-left-color: #fcd34d;
+  color: #fde68a;
+}
+
+.result-message.is-error {
+  border-left-color: #fca5a5;
+  color: #fecaca;
+}
+
+.result-message.is-info {
+  border-left-color: var(--text-muted);
+  color: var(--text-2);
+}
+
+/* ---------- 18b. Tombol menu HP ---------- */
+.nav-toggle {
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(254, 253, 254, 0.55);
+  border-radius: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  border-color: var(--text);
+}
+
+/* Ikon tiga garis, berubah jadi silang saat menu terbuka */
+.nav-toggle-icon,
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.nav-toggle-icon {
+  position: relative;
+}
+
+.nav-toggle-icon::before,
+.nav-toggle-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-icon::before { top: -5px; }
+.nav-toggle-icon::after  { top: 5px; }
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon {
+  background: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* ---------- 18c. Teks keunggulan ---------- */
+.feature-num {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.feature-title {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.15;
+}
+
+.feature-desc {
+  color: var(--text-2);
+}
+
+.feature-plans {
+  justify-self: start;
+  font-size: 0.75rem;
+  color: var(--text-2);
+  border: 1px solid var(--hairline);
+  padding: 6px 10px;
+}
+
+/* ---------- 18d. Mockup kecil di keunggulan (produk, boleh cyan) ---------- */
+.mock {
+  background: var(--surface-deep);
+  border: 1px solid rgba(254, 253, 254, 0.14);
+  padding: 22px;
+  display: grid;
+  gap: 16px;
+}
+
+.mock-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.mock-field {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.mock-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border: 1px solid rgba(103, 232, 249, 0.45);
+  color: var(--accent);
+  background: rgba(103, 232, 249, 0.06);
+}
+
+.mock-result {
+  display: grid;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 14px;
+}
+
+.mock-big {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.mock-channel {
+  display: grid;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 14px;
+}
+
+.mock-channel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.875rem;
+}
+
+.mock-on {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+}
+
+.mock-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mock-meter {
+  display: block;
+  height: 6px;
+  background: var(--hairline);
+}
+
+.mock-meter span {
+  display: block;
+  height: 100%;
+  width: var(--w); /* lebar diambil dari atribut style di HTML */
+  background: var(--accent);
+}
+
+.mock-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mock-table th {
+  text-align: right;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.mock-table td {
+  text-align: right;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-2);
+}
+
+.mock-table th:first-child,
+.mock-table td:first-child {
+  text-align: left;
+}
+
+/* Baris minggu terakhir disorot */
+.mock-table tbody tr:last-child td {
+  color: var(--accent);
+  border-bottom: none;
+}
+
+.mock-note {
+  font-size: 0.8125rem;
+  color: var(--text-2);
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 10px 12px;
+}
+
+.mock-note strong {
+  color: var(--text);
+}
+
+/* Bayangan hanya untuk panel yang menimpa foto (satu arah cahaya) */
+.mock-float {
+  box-shadow: 0 24px 48px rgba(0, 10, 15, 0.45);
+}
+
+/* Label kecil di pojok foto */
+.photo-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  background: rgba(16, 23, 28, 0.88);
+  color: var(--text);
+  padding: 6px 10px;
+}
+
+/* ---------- 18e. Tanya jawab (buka-tutup) ---------- */
+.faq-list {
+  border-top: 1px solid var(--hairline);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 20px 0;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Tanda + berubah jadi - saat terbuka */
+.faq-item summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  color: var(--text-2);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.faq-item[open] summary::after {
+  content: "\2212";
+  background: var(--text);
+  color: var(--text-inverse);
+  border-color: var(--text);
+}
+
+.faq-item summary:hover::after {
+  border-color: var(--text);
+}
+
+.faq-item summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.faq-item p {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  padding: 0 56px 22px 0;
+  max-width: 70ch;
+}
+
+/* ---------- 18f. Panduan langkah kalkulator ---------- */
+.step {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: 14px;
+  row-gap: 4px;
+  padding-top: 16px;
+  border-top: 2px solid var(--text-inverse);
+}
+
+.step-num {
+  grid-row: span 2;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--text-inverse);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.step-title {
+  font-size: 1.125rem;
+  line-height: 1.3;
+}
+
+.step-desc {
+  font-size: 0.8125rem;
+  color: var(--text-inverse-muted);
+}
+
+/* Tombol Atur ulang di kalkulator */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-inverse);
+  border-color: #6e6d6e;
+}
+
+.btn-ghost:hover {
+  border-color: var(--text-inverse);
+  background: var(--ground-inverse);
+}
+
+/* ---------- 18g. Banner penutup ---------- */
+.closing-title {
+  font-size: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+  line-height: 1.1;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+/* ---------- 18h. Banner penutup ---------- */
+.closing-lead {
+  color: var(--text-2);
+  max-width: 44ch;
+}
+
+/* ---------- 19. Responsif komponen di HP ---------- */
+@media (max-width: 640px) {
+  .promo-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .calc-form,
+  .calc-result {
+    padding: 22px;
+  }
+
+  .result-total .result-value {
+    font-size: 1.875rem;
+  }
+
+  .dash {
+    padding: 16px;
+  }
+
+  .mock {
+    padding: 16px;
+  }
+
+  .mock-field {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .faq-item summary {
+    font-size: 1rem;
+  }
+
+  .faq-item p {
+    padding-right: 0;
+  }
+
+  .dash-metrics {
+    gap: 8px;
+  }
+
+  .metric {
+    padding: 10px;
+  }
+
+  .metric-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* Hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+}
